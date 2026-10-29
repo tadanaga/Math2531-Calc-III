@@ -39,6 +39,7 @@ three mutually perpendicular axes. The origin is $O=(0,0,0)$.
   $x$ toward positive $y$; your thumb points toward positive $z$.
 }{%
   \centering
+  \resizebox{\linewidth}{!}{%
   \begin{tikzpicture}[x={(-0.65cm,-0.38cm)},y={(0.85cm,-0.12cm)},z={(0cm,0.85cm)},
       >=Latex,font=\small,line join=round]
     \fill[notesblue!6] (0,0,0)--(3.5,0,0)--(3.5,4.3,0)--(0,4.3,0)--cycle;
@@ -52,7 +53,8 @@ three mutually perpendicular axes. The origin is $O=(0,0,0)$.
     \fill[notesteal] (2,3,2) circle (2.5pt) node[above right]{$P=(2,3,2)$};
     \node[above left] at (0,0,0) {$O$};
     \node[notesmuted] at (3.1,1.1,0) {$xy$-plane};
-  \end{tikzpicture}
+  \end{tikzpicture}%
+  }
 }
 
 \subsection*{Coordinate planes}
