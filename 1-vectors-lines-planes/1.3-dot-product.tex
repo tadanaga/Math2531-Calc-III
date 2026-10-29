@@ -1,5 +1,178 @@
-% Math 2531: Dot Product
-% Stewart, Calculus, 9th edition: Section 12.3
-% Curriculum: https://math.unm.edu/~heitzman/courses/2531/index.html
+\documentclass[11pt]{article}
+% Compile with pdfLaTeX from the repository root or from this folder.
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\usepackage{notes}
+\setboolean{showanswer}{true}
+% Short calculations on the first page need less student writing space.
+\renewcommand{\solutionheight}{14mm}
 
-% TODO: Add lecture notes.
+\begin{document}
+\lesson[Stewart, Calculus, 9th edition\enspace\textbullet\enspace Section 12.3]
+  {1.3}{Dot Product}
+
+\section{A product that measures alignment}
+The dot product produces a \textbf{scalar} and connects component calculations with angles.
+
+\begin{definition}[Dot product]
+For $\B{u}=\cvec{u_1,u_2,u_3}$ and $\B{v}=\cvec{v_1,v_2,v_3}$,
+\[
+  \B{u}\cdot\B{v}=u_1v_1+u_2v_2+u_3v_3.
+\]
+In two dimensions, omit the third term. Multiply corresponding components,
+then add the results.
+\end{definition}
+
+\begin{example}{Compute $\B{u}\cdot\B{v}$ for
+$\B{u}=\cvec{2,-1,3}$ and $\B{v}=\cvec{1,4,-2}$.}
+Multiply corresponding components and add:
+$\B{u}\cdot\B{v}=2(1)+(-1)(4)+3(-2)=-8$.
+\end{example}
+
+\textbf{Properties.} The dot product is commutative and distributes over addition:
+\[
+ \B{u}\cdot\B{v}=\B{v}\cdot\B{u},\qquad
+ \B{u}\cdot(\B{v}+\B{w})=\B{u}\cdot\B{v}+\B{u}\cdot\B{w}.
+\]
+Scalars factor out: $(c\B{u})\cdot\B{v}=c(\B{u}\cdot\B{v})$.
+Also, $\B{u}\cdot\B{u}=\lVert\B{u}\rVert^2$: a vector dotted with itself
+gives its squared length.
+
+\section{The angle between vectors}
+Place two nonzero vectors tail to tail. Their angle $\theta$ is chosen in
+the range $0\leq\theta\leq\pi$. The geometric formula for the dot product is
+\[
+ \B{u}\cdot\B{v}=\lVert\B{u}\rVert\lVert\B{v}\rVert\cos\theta,
+ \qquad
+ \cos\theta=\frac{\B{u}\cdot\B{v}}
+ {\lVert\B{u}\rVert\lVert\B{v}\rVert}.
+\]
+A positive dot product means $\theta<90^\circ$; a negative dot product means
+$\theta>90^\circ$. At $0$ and $\pi$, the vectors point in the same and opposite
+directions, respectively.
+
+\begin{example}{Find the angle between
+$\B{u}=\cvec{1,1,0}$ and $\B{v}=\cvec{1,0,1}$.}
+We have $\B{u}\cdot\B{v}=1$ and
+$\lVert\B{u}\rVert=\lVert\B{v}\rVert=\sqrt{2}$. Thus
+$\cos\theta=1/(\sqrt{2}\sqrt{2})=1/2$, giving $\theta=\pi/3=60^\circ$.
+\end{example}
+
+\newpage
+\renewcommand{\solutionheight}{24mm}
+\section{Perpendicular vectors and projections}
+\begin{definition}[Orthogonality]
+Two vectors are \textbf{orthogonal} when their dot product is zero.
+For nonzero vectors, this means the angle between them is $90^\circ$.
+The zero vector is orthogonal to every vector, although it has no direction.
+\end{definition}
+
+\begin{example}{Are $\B{u}=\cvec{2,-1,3}$ and
+$\B{v}=\cvec{1,2,0}$ perpendicular?}
+Since $\B{u}\cdot\B{v}=2(1)+(-1)(2)+3(0)=0$, the two nonzero vectors
+are perpendicular. No inverse cosine is needed.
+\end{example}
+
+\subsection*{The part of a vector in a given direction}
+The projection of $\B{a}$ onto a nonzero vector $\B{b}$ is the part of
+$\B{a}$ parallel to $\B{b}$. Think of it as the shadow of $\B{a}$ on the
+line through $\B{b}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85,>=Latex,font=\small]
+ \draw[notesrule] (-0.5,0)--(5,0);
+ \draw[->,very thick,notesblue] (0,0)--(3,2) node[above]{$\B{a}$};
+ \draw[->,thick,notesmuted] (0,-0.9)--(4,-0.9) node[midway,below]{$\B{b}$ direction};
+ \draw[->,very thick,notesteal] (0,0)--(3,0)
+   node[midway,below]{$\operatorname{proj}_{\B{b}}\B{a}$};
+ \draw[dashed,notesmuted] (3,0)--(3,2);
+ \draw[notesmuted] (2.8,0)--(2.8,0.2)--(3,0.2);
+ \draw[notesink] (0.7,0) arc[start angle=0,end angle=33.69,radius=0.7];
+ \node at (0.95,0.3) {$\theta$};
+\end{tikzpicture}
+\end{center}
+
+\begin{definition}[Scalar and vector projections]
+For $\B{b}\ne\B{0}$, the \textbf{scalar projection} of $\B{a}$ onto $\B{b}$ is
+\[
+ \operatorname{comp}_{\B{b}}\B{a}
+ =\frac{\B{a}\cdot\B{b}}{\lVert\B{b}\rVert}.
+\]
+This is a signed component along $\B{b}$. The \textbf{vector projection} is
+\[
+ \operatorname{proj}_{\B{b}}\B{a}
+ =\frac{\B{a}\cdot\B{b}}{\lVert\B{b}\rVert^2}\B{b}.
+\]
+\end{definition}
+
+\begin{example}{Project $\B{a}=\cvec{3,1,0}$ onto $\B{b}=\cvec{1,1,0}$.}
+Here $\B{a}\cdot\B{b}=4$ and $\lVert\B{b}\rVert^2=2$. Thus
+\[
+ \operatorname{comp}_{\B{b}}\B{a}=\frac4{\sqrt{2}}=2\sqrt{2},
+ \qquad
+ \operatorname{proj}_{\B{b}}\B{a}=\frac42\cvec{1,1,0}=\cvec{2,2,0}.
+\]
+The remaining part is $\B{a}-\operatorname{proj}_{\B{b}}\B{a}=\cvec{1,-1,0}$.
+Its dot product with $\B{b}$ is zero, so the remaining part is perpendicular
+to the projection direction.
+\end{example}
+
+\newpage
+\section{Direction angles}
+We can describe a nonzero vector's direction using its angles with the
+three positive coordinate axes.
+
+\begin{definition}[Direction cosines]
+For a nonzero vector $\B{v}=\cvec{v_1,v_2,v_3}$, let $\alpha$, $\beta$, and
+$\gamma$ be its angles with the positive $x$-, $y$-, and $z$-axes. Then
+\[
+ \cos\alpha=\frac{v_1}{\lVert\B{v}\rVert},\qquad
+ \cos\beta=\frac{v_2}{\lVert\B{v}\rVert},\qquad
+ \cos\gamma=\frac{v_3}{\lVert\B{v}\rVert}.
+\]
+These \textbf{direction cosines} are the components of the unit vector
+$\B{v}/\lVert\B{v}\rVert$.
+\end{definition}
+
+For example, $\B{v}\cdot\B{i}=v_1$ and $\lVert\B{i}\rVert=1$, so the angle
+formula gives $\cos\alpha=v_1/\lVert\B{v}\rVert$. The other two formulas
+follow in the same way. Since the unit direction has length $1$,
+\[
+ \cos^2\alpha+\cos^2\beta+\cos^2\gamma=1.
+\]
+
+\begin{example}{Find the direction angles of $\B{v}=\cvec{1,-1,\sqrt{2}}$.}
+Its magnitude is $\lVert\B{v}\rVert=\sqrt{1+1+2}=2$. Therefore,
+\[
+ \cos\alpha=\frac12,\qquad
+ \cos\beta=-\frac12,\qquad
+ \cos\gamma=\frac{\sqrt{2}}2.
+\]
+The direction angles are $\alpha=60^\circ$, $\beta=120^\circ$, and
+$\gamma=45^\circ$. The negative $y$-component gives an obtuse angle
+with the positive $y$-axis.
+\end{example}
+
+\section{Work done by a constant force}
+Only the part of a force in the direction of motion contributes to work.
+For a constant force $\B{F}$ and a displacement $\B{d}$,
+\[
+ W=\B{F}\cdot\B{d}
+  =\lVert\B{F}\rVert\lVert\B{d}\rVert\cos\theta.
+\]
+Work is positive when the force has a component along the displacement,
+zero when they are perpendicular, and negative when the force has a
+component against the displacement.
+
+\begin{example}{A constant force $\B{F}=\cvec{3,4}$ newtons moves an object
+from $P=(1,2)$ to $Q=(5,2)$, with coordinates measured in meters.
+Find the work done by the force.}
+The displacement is $\B{d}=\vec{PQ}=\cvec{4,0}$ meters, so
+\[
+ W=\B{F}\cdot\B{d}=3(4)+4(0)=12\text{ joules}.
+\]
+The vertical component of the force contributes no work because the
+displacement is horizontal.
+\end{example}
+\end{document}
