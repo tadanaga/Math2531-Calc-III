@@ -1,5 +1,175 @@
-% Math 2531: Equations of Lines
-% Stewart, Calculus, 9th edition: Section 12.5
-% Curriculum: https://math.unm.edu/~heitzman/courses/2531/index.html
+\documentclass[11pt]{article}
+% Compile with pdfLaTeX from the repository root or from this folder.
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\usepackage{notes}
+\setboolean{showanswer}{true}
+\renewcommand{\solutionheight}{22mm}
 
-% TODO: Add lecture notes.
+\begin{document}
+\lesson[Stewart, Calculus, 9th edition\enspace\textbullet\enspace Section 12.5]
+  {1.5}{Equations of Lines}
+
+\section{A point and a direction}
+To describe a line in space, specify a point on the line and a nonzero
+vector parallel to it. Starting at that point, move any scalar multiple of
+the direction vector.
+
+\begin{definition}[Vector equation of a line]
+The line through $P_0=(x_0,y_0,z_0)$ with direction vector
+$\B{v}=\cvec{a,b,c}\ne\B{0}$ has vector equation
+\[
+ \B{r}(t)=\B{r}_0+t\B{v},\qquad -\infty<t<\infty,
+ \quad\text{where }\B{r}_0=\cvec{x_0,y_0,z_0}.
+\]
+The parameter $t$ labels points along the line; $t=0$ gives $P_0$.
+\end{definition}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8,>=Latex,font=\small]
+ \coordinate (O) at (0,0);
+ \coordinate (P) at (1,2);
+ \coordinate (Q) at (5,3);
+ \draw[<->,notesrule,thick] (0,1.75)--(6,3.25) node[right,notesmuted]{$L$};
+ \draw[->,thick,notesblue] (O)--(P) node[midway,above left]{$\B{r}_0$};
+ \draw[->,very thick,notesteal] (P)--(Q) node[midway,above left]{$t\B{v}$};
+ \draw[->,thick,notesink] (O)--(Q) node[midway,below right]{$\B{r}(t)$};
+ \fill[notesink] (O) circle (1.7pt) node[below]{$O$};
+ \fill[notesblue] (P) circle (2pt) node[below right]{$P_0$};
+ \fill[notesteal] (Q) circle (2pt) node[above]{$P$};
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Parametric equations}
+Reading the vector equation one component at a time gives
+\[
+ x=x_0+at,\qquad y=y_0+bt,\qquad z=z_0+ct.
+\]
+All three coordinates use the \textbf{same parameter value}. The parameter
+need not represent time.
+
+\begin{example}{Find vector and parametric equations for the line through
+$P_0=(1,-2,3)$ parallel to $\B{v}=\cvec{2,1,-1}$.}
+Use the point for $\B{r}_0$ and the given vector for the direction:
+\[
+ \B{r}(t)=\cvec{1,-2,3}+t\cvec{2,1,-1}.
+\]
+The parametric equations are $x=1+2t$, $y=-2+t$, and $z=3-t$.
+At $t=1$, the line passes through $(3,-1,2)$.
+\end{example}
+
+\subsection*{Symmetric equations}
+When $a$, $b$, and $c$ are all nonzero, solve each coordinate equation for
+$t$ and equate the results:
+\[
+ \frac{x-x_0}{a}=\frac{y-y_0}{b}=\frac{z-z_0}{c}.
+\]
+For Example 1, this becomes $(x-1)/2=y+2=(z-3)/(-1)$.
+
+\newpage
+\section{Building and interpreting line equations}
+\subsection*{A line through two points}
+For distinct points $A$ and $B$, the displacement $\vec{AB}$ supplies a
+direction vector. Any nonzero scalar multiple of that vector can be used
+instead.
+
+\begin{example}{Find the line through $A=(1,-2,3)$ and $B=(5,0,-1)$.
+How would you describe only the segment joining them?}
+The direction vector is $\vec{AB}=\cvec{4,2,-4}$, giving
+\[
+ \B{r}(t)=\cvec{1,-2,3}+t\cvec{4,2,-4},\qquad t\in\mathbb{R}.
+\]
+Equivalently, the line has symmetric equations
+\[
+ \frac{x-1}{4}=\frac{y+2}{2}=\frac{z-3}{-4}.
+\]
+Restricting the parameter to $0\leq t\leq1$ gives the \textbf{line segment}:
+$t=0$ gives $A$, $t=1$ gives $B$, and $t=1/2$ gives the midpoint $(3,-1,1)$.
+\end{example}
+
+\begin{definition}[Line segment]
+If $\B{a}$ and $\B{b}$ are the position vectors of endpoints $A$ and $B$,
+the segment from $A$ to $B$ is
+\[
+ \B{r}(t)=(1-t)\B{a}+t\B{b},\qquad 0\leq t\leq1.
+\]
+This is the same as $\B{r}(t)=\B{a}+t(\B{b}-\B{a})$.
+\end{definition}
+
+\subsection*{A zero direction component}
+A zero component means that coordinate stays constant. Keep its equation
+separate when writing symmetric equations; never divide by zero.
+
+\begin{example}{A line passes through $(2,-1,4)$ with direction
+$\cvec{0,3,-2}$. Write its equations and decide whether
+$Q=(2,5,0)$ and $R=(2,5,2)$ lie on it.}
+The parametric equations are
+\[
+ x=2,\qquad y=-1+3t,\qquad z=4-2t.
+\]
+A symmetric description is $x=2$, together with
+\[
+ \frac{y+1}{3}=\frac{z-4}{-2}.
+\]
+For $Q$, the $y$-coordinate gives $t=2$, which also gives $z=0$.
+Thus $Q$ lies on the line.
+
+For $R$, the $y$-coordinate still requires $t=2$, but then $z=0\ne2$.
+Thus $R$ does not lie on the line. Each coordinate must agree at one
+common parameter value.
+\end{example}
+
+\newpage
+\section{How two lines can meet}
+In a plane, two distinct lines are parallel or intersect. Space allows
+one more possibility: lines that are neither parallel nor intersecting.
+
+\begin{definition}[Relative positions of lines]
+Two lines are \textbf{parallel} when their direction vectors are scalar
+multiples of one another. Parallel lines may be distinct or coincident
+(the same line).
+
+Two nonparallel lines either \textbf{intersect} at one point or are
+\textbf{skew}: they do not intersect and do not lie in a common plane.
+\end{definition}
+
+To test for an intersection, give each line its own parameter and equate
+corresponding coordinates. A point of intersection must satisfy all three
+coordinate equations.
+
+\begin{example}{Determine whether these lines intersect:
+\[
+ L_1:\ \B{r}(t)=\cvec{1,0,2}+t\cvec{1,2,-1},\qquad
+ L_2:\ \B{s}(u)=\cvec{0,3,0}+u\cvec{2,-1,1}.
+\]}
+Equating coordinates gives
+\[
+ 1+t=2u,\qquad 2t=3-u,\qquad 2-t=u.
+\]
+Use the third equation in the second:
+$2t=3-(2-t)=1+t$, so $t=1$ and $u=1$.
+The first equation also holds: $1+1=2(1)$.
+
+Substituting into either line gives the intersection point
+$\boxed{(2,2,1)}$. Here the parameters happen to be equal; that need not
+be true for other parametrizations.
+\end{example}
+
+\begin{example}{Classify the lines
+$L_1:\ \B{r}(t)=\cvec{t,t,0}$ and
+$L_2:\ \B{s}(u)=\cvec{u,-u,1}$.}
+Their direction vectors $\cvec{1,1,0}$ and $\cvec{1,-1,0}$ are not scalar
+multiples, so the lines are not parallel.
+
+Every point of $L_1$ has $z=0$, while every point of $L_2$ has $z=1$.
+The lines cannot intersect, so they are \textbf{skew}.
+\end{example}
+
+\subsection*{Different equations can describe the same line}
+Changing the base point to another point on the line, or multiplying the
+direction vector by a nonzero scalar, changes the parametrization without
+changing the line. If two direction vectors are parallel, test whether a
+point from one line lies on the other to distinguish coincident lines
+from distinct parallel lines.
+\end{document}
