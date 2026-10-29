@@ -1,12 +1,25 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{notes}[2026/10/28 Math 2531 lecture notes]
 
+% Optional handwriting margin: \usepackage[widemargin]{notes}.
+% Or, after loading notes, use \notesmargin[2.2in] in the preamble.
+% The value is the total left margin, measured from the paper edge.
+\newif\ifnoteswidemargin
+\DeclareOption{widemargin}{\noteswidemargintrue}
+\ProcessOptions\relax
+
 % Typography and page layout. Override geometry or metadata in a lesson.
 \RequirePackage[T1]{fontenc}
 \RequirePackage{charter}
 \RequirePackage[scaled=0.92]{helvet}
 \RequirePackage{microtype}
 \RequirePackage[letterpaper,margin=0.8in,headheight=23pt,headsep=16pt,footskip=26pt]{geometry}
+% Keep a physical left margin on every page, including two-sided documents.
+\newcommand{\notesmargin}[1][2in]{%
+  \geometry{left=#1,right=0.8in,asymmetric}%
+}
+\ifnoteswidemargin\notesmargin\fi
+\@onlypreamble\notesmargin
 \RequirePackage{amsmath,amsthm,amssymb,mathtools,bm,cancel}
 \RequirePackage{graphicx,float,multicol,multirow,tabularx,array,booktabs,subcaption,wrapfig}
 \RequirePackage{xcolor,enumitem,fancyhdr,lastpage,titlesec,needspace}
