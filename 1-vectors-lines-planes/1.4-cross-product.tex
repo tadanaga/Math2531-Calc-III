@@ -1,5 +1,186 @@
-% Math 2531: Cross Product
-% Stewart, Calculus, 9th edition: Section 12.4
-% Curriculum: https://math.unm.edu/~heitzman/courses/2531/index.html
+\documentclass[11pt]{article}
+% Compile with pdfLaTeX from the repository root or from this folder.
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\usepackage{notes}
+\setboolean{showanswer}{true}
+\renewcommand{\solutionheight}{22mm}
 
-% TODO: Add lecture notes.
+\begin{document}
+\lesson[Stewart, Calculus, 9th edition\enspace\textbullet\enspace Section 12.4]
+  {1.4}{Cross Product}
+
+\section{A vector perpendicular to two vectors}
+The dot product measures alignment and returns a scalar. The cross product
+of two vectors in $\mathbb{R}^3$ returns a \textbf{vector} perpendicular to both.
+
+\begin{definition}[Cross product]
+For $\B{u}=\cvec{u_1,u_2,u_3}$ and $\B{v}=\cvec{v_1,v_2,v_3}$,
+\[
+ \B{u}\times\B{v}
+ =\cvec{u_2v_3-u_3v_2,\ u_3v_1-u_1v_3,\ u_1v_2-u_2v_1}.
+\]
+The order matters: $\B{v}\times\B{u}=-(\B{u}\times\B{v})$.
+\end{definition}
+
+\subsection*{A determinant helps organize the calculation}
+We use the formal determinant notation
+\[
+ \B{u}\times\B{v}
+ =\begin{vmatrix}
+ \B{i}&\B{j}&\B{k}\\
+ u_1&u_2&u_3\\
+ v_1&v_2&v_3
+ \end{vmatrix}.
+\]
+Expand along the first row with signs $+,-,+$. The minus sign on the
+$\B{j}$ term is easy to miss:
+\[
+ \B{u}\times\B{v}
+ =(u_2v_3-u_3v_2)\B{i}
+ -(u_1v_3-u_3v_1)\B{j}
+ +(u_1v_2-u_2v_1)\B{k}.
+\]
+
+\begin{example}{Find $\B{u}\times\B{v}$ for
+$\B{u}=\cvec{1,2,0}$ and $\B{v}=\cvec{0,1,2}$.}
+Expanding the determinant gives
+\begin{align*}
+ \B{u}\times\B{v}
+ &=\begin{vmatrix}\B{i}&\B{j}&\B{k}\\1&2&0\\0&1&2\end{vmatrix}\\
+ &=(4-0)\B{i}-(2-0)\B{j}+(1-0)\B{k}=\cvec{4,-2,1}.
+\end{align*}
+Check perpendicularity using dot products:
+\[
+ \cvec{4,-2,1}\cdot\cvec{1,2,0}=4-4=0,\qquad
+ \cvec{4,-2,1}\cdot\cvec{0,1,2}=-2+2=0.
+\]
+\end{example}
+
+\subsection*{Useful properties}
+For vectors $\B{u},\B{v},\B{w}$ and a scalar $c$,
+\[
+ \B{u}\times(\B{v}+\B{w})=\B{u}\times\B{v}+\B{u}\times\B{w},
+ \qquad
+ (c\B{u})\times\B{v}=c(\B{u}\times\B{v}).
+\]
+Also, $\B{u}\times\B{u}=\B{0}$. Unlike ordinary multiplication, the cross
+product is neither commutative nor associative.
+
+\newpage
+\section{Direction, length, and area}
+\begin{definition}[Geometric meaning]
+For nonzero vectors $\B{u}$ and $\B{v}$ with angle $0\leq\theta\leq\pi$,
+\[
+ \lVert\B{u}\times\B{v}\rVert
+ =\lVert\B{u}\rVert\lVert\B{v}\rVert\sin\theta.
+\]
+When the cross product is nonzero, its direction is given by the
+\textbf{right-hand rule}: curl your fingers from $\B{u}$ toward $\B{v}$
+through the smaller angle; your thumb points along $\B{u}\times\B{v}$.
+\end{definition}
+
+\begin{center}
+\begin{tikzpicture}[x={(-0.75cm,-0.4cm)},y={(0.9cm,-0.12cm)},z={(0cm,0.85cm)},
+ >=Latex,font=\small]
+ \fill[notesblue!5] (0,0,0)--(2.8,0,0)--(2.8,3,0)--(0,3,0)--cycle;
+ \draw[dashed,notesrule] (2.8,0,0)--(2.8,3,0)--(0,3,0);
+ \draw[->,very thick,notesblue] (0,0,0)--(2.8,0,0) node[below left]{$\B{u}$};
+ \draw[->,very thick,notesteal] (0,0,0)--(0,3,0) node[right]{$\B{v}$};
+ \draw[->,very thick,notesink] (0,0,0)--(0,0,2.1) node[above]{$\B{u}\times\B{v}$};
+ \fill[notesink] (0,0,0) circle (1.6pt);
+\end{tikzpicture}
+\end{center}
+
+In particular, $\B{i}\times\B{j}=\B{k}$,
+$\B{j}\times\B{k}=\B{i}$, and $\B{k}\times\B{i}=\B{j}$.
+Reversing any pair changes the sign. For two nonzero vectors, the cross
+product is zero exactly when they are parallel, including opposite directions.
+
+\begin{example}{Find a unit vector perpendicular to both
+$\B{u}=\cvec{1,2,0}$ and $\B{v}=\cvec{0,1,2}$.}
+From Example 1, a perpendicular vector is $\B{n}=\cvec{4,-2,1}$.
+Its magnitude is $\sqrt{16+4+1}=\sqrt{21}$, so one unit normal is
+\[
+ \widehat{\B{n}}=\frac{1}{\sqrt{21}}\cvec{4,-2,1}.
+\]
+The opposite vector $-\widehat{\B{n}}$ is also a unit normal.
+\end{example}
+
+\subsection*{Areas from two sides}
+A parallelogram with adjacent sides $\B{u}$ and $\B{v}$ has base
+$\lVert\B{u}\rVert$ and height $\lVert\B{v}\rVert\sin\theta$. Therefore,
+\[
+ A_{\text{parallelogram}}=\lVert\B{u}\times\B{v}\rVert,
+ \qquad A_{\text{triangle}}=\tfrac12\lVert\B{u}\times\B{v}\rVert.
+\]
+
+\begin{example}{Find the area of the triangle with vertices
+$P=(1,0,0)$, $Q=(2,2,0)$, and $R=(1,1,2)$.}
+Use two sides starting at the same vertex:
+$\vec{PQ}=\cvec{1,2,0}$ and $\vec{PR}=\cvec{0,1,2}$. Thus
+\[
+ A=\tfrac12\lVert\vec{PQ}\times\vec{PR}\rVert=\frac{\sqrt{21}}2.
+\]
+\end{example}
+
+\newpage
+\section{Torque}
+A force can turn an object about a pivot. Both the force and where it is
+applied affect this turning effect.
+
+\begin{definition}[Torque]
+Let $\B{r}$ point from the pivot to the point where a force $\B{F}$ is applied.
+The \textbf{torque} about the pivot is
+\[
+ \boldsymbol{\tau}=\B{r}\times\B{F},\qquad
+ \lVert\boldsymbol{\tau}\rVert
+ =\lVert\B{r}\rVert\lVert\B{F}\rVert\sin\theta.
+\]
+Its direction gives the axis of rotation by the right-hand rule.
+\end{definition}
+
+\begin{example}{A force $\B{F}=\cvec{0,3,0}$ newtons is applied at position
+$\B{r}=\cvec{2,0,0}$ meters relative to a pivot. Find the torque.}
+Since $\B{r}=2\B{i}$ and $\B{F}=3\B{j}$,
+\[
+ \boldsymbol{\tau}=(2\B{i})\times(3\B{j})=6\B{k}.
+\]
+The torque has magnitude $6$ newton-meters and points along the positive
+$z$-axis. A force parallel to $\B{r}$ would produce zero torque.
+\end{example}
+
+\section{The scalar triple product}
+Combining a cross product with a dot product gives a volume calculation.
+
+\begin{definition}[Scalar triple product]
+The \textbf{scalar triple product} of $\B{a}$, $\B{b}$, and $\B{c}$ is
+\[
+ \B{a}\cdot(\B{b}\times\B{c}).
+\]
+The volume of the parallelepiped with these three adjacent edge vectors is
+\[
+ V=\bigl|\B{a}\cdot(\B{b}\times\B{c})\bigr|.
+\]
+\end{definition}
+
+The cross product $\B{b}\times\B{c}$ supplies a base area and a normal
+direction. Dotting with $\B{a}$ accounts for the perpendicular height.
+The absolute value makes the volume nonnegative.
+
+\begin{example}{Find the volume determined by
+$\B{a}=\cvec{1,0,1}$, $\B{b}=\cvec{0,2,0}$, and $\B{c}=\cvec{1,0,3}$.}
+First compute
+\[
+ \B{b}\times\B{c}
+ =\begin{vmatrix}\B{i}&\B{j}&\B{k}\\0&2&0\\1&0&3\end{vmatrix}
+ =\cvec{6,0,-2}.
+\]
+Then $V=|\cvec{1,0,1}\cdot\cvec{6,0,-2}|=|6-2|=4$ cubic units.
+\end{example}
+
+Three vectors are \textbf{coplanar} when they lie in a common plane through
+the origin. This happens exactly when their scalar triple product is zero:
+the corresponding solid has zero volume.
+\end{document}
