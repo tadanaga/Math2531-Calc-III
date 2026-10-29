@@ -1,5 +1,177 @@
-% Math 2531: Vectors
-% Stewart, Calculus, 9th edition: Section 12.2
-% Curriculum: https://math.unm.edu/~heitzman/courses/2531/index.html
+\documentclass[11pt]{article}
+% Compile with pdfLaTeX from the repository root or from this folder.
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\usepackage{notes}
+\setboolean{showanswer}{true}
 
-% TODO: Add lecture notes.
+\begin{document}
+\lesson[Stewart, Calculus, 9th edition\enspace\textbullet\enspace Section 12.2]
+  {1.2}{Vectors}
+
+\section{Vectors and their components}
+A point tells us \emph{where}. A vector describes a displacement: how far
+and in which direction.
+
+\cols{%
+\begin{definition}[Vector]
+A \textbf{vector} has both magnitude (length) and direction. Two arrows
+represent the same vector when they have the same length and direction,
+even if they start at different points.
+\end{definition}
+}{%
+\centering
+\begin{tikzpicture}[scale=0.6,>=Latex,font=\small]
+  \draw[step=1,notesrule!65,very thin] (-0.3,-0.3) grid (7.3,3.6);
+  \draw[->,notesmuted] (-0.3,0)--(7.6,0) node[right]{$x$};
+  \draw[->,notesmuted] (0,-0.3)--(0,3.9) node[above]{$y$};
+  \draw[->,very thick,notesblue] (0,0)--(3,2) node[midway,above left]{$\B{v}$};
+  \draw[->,very thick,notesteal] (4,1)--(7,3) node[midway,above left]{$\B{v}$};
+  \fill[notesblue] (0,0) circle (2pt);
+  \fill[notesteal] (4,1) circle (2pt);
+\end{tikzpicture}
+
+{\small\color{notesmuted}Same displacement: 3 units right and 2 units up.}
+}
+
+\subsection*{Component form}
+We write $\B{v}=\cvec{v_1,v_2}$ in the plane and
+$\B{v}=\cvec{v_1,v_2,v_3}$ in space. The components record the change in each
+coordinate. For points $P=(x_1,y_1,z_1)$ and $Q=(x_2,y_2,z_2)$,
+\[
+  \vec{PQ}=\cvec{x_2-x_1,\ y_2-y_1,\ z_2-z_1}.
+\]
+Subtract \textbf{terminal minus initial}. Moving the arrow so its initial
+point is the origin gives its \emph{position vector} representation.
+
+\begin{definition}[Magnitude]
+The magnitude of $\B{v}=\cvec{v_1,v_2,v_3}$ is
+\[
+  \lVert\B{v}\rVert=\sqrt{v_1^2+v_2^2+v_3^2}.
+\]
+For a vector in the plane, omit the third component. The \textbf{zero vector}
+$\B{0}$ has all components zero; it has magnitude zero and no direction.
+\end{definition}
+
+\begin{example}{Find the vector from $P=(1,-2,3)$ to $Q=(4,2,3)$ and its magnitude.}
+The displacement is
+\[
+  \vec{PQ}=\cvec{4-1,\ 2-(-2),\ 3-3}=\cvec{3,4,0}.
+\]
+Its magnitude is $\lVert\vec{PQ}\rVert=\sqrt{3^2+4^2+0^2}=5$.
+Reversing the trip gives $\vec{QP}=\cvec{-3,-4,0}$: the same length,
+with the opposite direction.
+\end{example}
+
+\newpage
+\section{Adding and scaling vectors}
+Vector arithmetic works one component at a time. A \textbf{scalar} is an
+ordinary real number that scales a vector.
+
+\begin{definition}[Vector operations]
+For $\B{u}=\cvec{u_1,u_2,u_3}$, $\B{v}=\cvec{v_1,v_2,v_3}$, and $c\in\mathbb{R}$,
+\begin{align*}
+ \B{u}+\B{v}&=\cvec{u_1+v_1,\ u_2+v_2,\ u_3+v_3},\\
+ c\B{u}&=\cvec{cu_1,\ cu_2,\ cu_3}.
+\end{align*}
+Subtraction means adding the opposite: $\B{u}-\B{v}=\B{u}+(-\B{v})$.
+\end{definition}
+
+\subsection*{The geometry of addition}
+To add $\B{u}$ and $\B{v}$, place the tail of $\B{v}$ at the head of $\B{u}$.
+The sum runs from the first tail to the last head.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85,>=Latex,font=\small]
+  \coordinate (O) at (0,0);
+  \coordinate (U) at (3,0.6);
+  \coordinate (V) at (1,2);
+  \coordinate (S) at (4,2.6);
+  \draw[dashed,notesrule,thick] (O)--(V)--(S);
+  \draw[->,very thick,notesblue] (O)--(U) node[midway,below]{$\B{u}$};
+  \draw[->,very thick,notesteal] (U)--(S) node[midway,right]{$\B{v}$};
+  \draw[->,very thick,notesink] (O)--(S) node[midway,above left]{$\B{u}+\B{v}$};
+  \fill[notesink] (O) circle (1.8pt);
+\end{tikzpicture}
+\end{center}
+
+Scaling by $c$ changes the length by a factor of $|c|$:
+$\lVert c\B{v}\rVert=|c|\lVert\B{v}\rVert$.
+For a nonzero vector, $c>0$ preserves direction and $c<0$ reverses it.
+For $c=0$, the result is the zero vector.
+
+\begin{example}{Let $\B{u}=\cvec{2,-1,3}$ and $\B{v}=\cvec{-1,4,2}$.
+Find $\B{u}+\B{v}$ and $2\B{u}-\B{v}$.}
+Add and scale corresponding components:
+\begin{align*}
+ \B{u}+\B{v}&=\cvec{2-1,\ -1+4,\ 3+2}=\cvec{1,3,5},\\
+ 2\B{u}-\B{v}&=\cvec{4,-2,6}-\cvec{-1,4,2}=\cvec{5,-6,4}.
+\end{align*}
+\end{example}
+
+\begin{example}{A displacement of $\cvec{3,1}$ is followed by a displacement
+of $\cvec{-1,2}$. Find the total displacement. Is its magnitude the total
+distance traveled along the two straight segments?}
+The total displacement is $\cvec{3,1}+\cvec{-1,2}=\cvec{2,3}$,
+with magnitude $\sqrt{13}$. The distance traveled is
+$\sqrt{10}+\sqrt{5}$, which is larger. Displacement measures the change
+between the endpoints; distance traveled depends on the path.
+\end{example}
+
+\newpage
+\section{Unit vectors and direction}
+Sometimes we want to specify a direction independently of a length.
+
+\begin{definition}[Unit vector]
+A \textbf{unit vector} has magnitude $1$. For any nonzero vector $\B{v}$,
+\[
+  \B{u}=\frac{\B{v}}{\lVert\B{v}\rVert}
+\]
+is the unit vector in the same direction as $\B{v}$. This process is called
+\textbf{normalizing} the vector.
+\end{definition}
+
+Division by the magnitude scales the length to $1$ without changing the
+direction. The zero vector cannot be normalized because its magnitude is zero.
+
+\begin{example}{Find a unit vector pointing from $A=(1,2,-1)$ toward $B=(3,1,1)$.}
+First find the displacement and its length:
+\[
+  \vec{AB}=\cvec{2,-1,2},
+  \qquad \lVert\vec{AB}\rVert=\sqrt{4+1+4}=3.
+\]
+Divide each component by $3$:
+\[
+  \B{u}=\cvec{\tfrac23,-\tfrac13,\tfrac23}.
+\]
+Check: $\lVert\B{u}\rVert=\sqrt{\frac49+\frac19+\frac49}=1$.
+The unit vector pointing in the opposite direction is $-\B{u}$.
+\end{example}
+
+\subsection*{The standard unit vectors}
+The coordinate axes supply three natural unit vectors:
+\[
+  \B{i}=\cvec{1,0,0},\qquad
+  \B{j}=\cvec{0,1,0},\qquad
+  \B{k}=\cvec{0,0,1}.
+\]
+Every vector can be expressed using these directions:
+\[
+  \cvec{v_1,v_2,v_3}=v_1\B{i}+v_2\B{j}+v_3\B{k}.
+\]
+For instance, $\cvec{2,-1,2}=2\B{i}-\B{j}+2\B{k}$.
+
+\begin{example}{Find a vector of magnitude $12$ in the same direction as
+$\B{v}=2\B{i}-\B{j}+2\B{k}$.}
+The vector $\B{v}$ has magnitude $3$, so its unit direction is
+$\B{u}=\frac13\B{v}$. Multiply this unit vector by the desired length:
+\[
+  \B{w}=12\B{u}=4\B{v}=8\B{i}-4\B{j}+8\B{k}.
+\]
+Indeed, $\lVert\B{w}\rVert=\sqrt{64+16+64}=12$.
+\end{example}
+
+To construct a vector with a specified direction and magnitude, first
+\textbf{normalize}, then \textbf{scale}.
+\end{document}
