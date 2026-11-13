@@ -55,6 +55,22 @@
   pdftitle={Math 2531 Lecture Notes},pdfauthor={T. Takahashi},
   pdfsubject={Calculus III lecture notes},pdflang={en-US}}
 
+% Consistent textbook-style captions for numbered figures.
+% The float package above supports [H] for placement at the source location.
+% subcaption loads caption, so no additional caption package is necessary.
+\DeclareCaptionFont{notesfigurelabel}{\bfseries\color{notesblue}}
+\DeclareCaptionFont{notesfiguretext}{\color{notesmuted}}
+\captionsetup[figure]{%
+  font=small,
+  labelfont=notesfigurelabel,
+  textfont=notesfiguretext,
+  labelsep=period,
+  justification=centering,
+  singlelinecheck=false,
+  skip=6pt,
+  position=bottom
+}
+
 \newcommand{\class}{Math 2531}
 \newcommand{\term}{Fall 2026}
 \newcommand{\instructor}{T. Takahashi}
