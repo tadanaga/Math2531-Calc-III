@@ -34,20 +34,24 @@ $\B{v}=\cvec{a,b,c}\ne\B{0}$ has vector equation
 The parameter $t$ labels points along the line; $t=0$ gives $P_0$.
 \end{definition}
 
-\begin{center}
-\begin{tikzpicture}[scale=0.8,>=Latex,font=\small]
- \coordinate (O) at (0,0);
- \coordinate (P) at (1,2);
- \coordinate (Q) at (5,3);
- \draw[<->,notesrule,thick] (0,1.75)--(6,3.25) node[right,notesmuted]{$L$};
- \draw[->,thick,notesblue] (O)--(P) node[midway,above left]{$\B{r}_0$};
- \draw[->,very thick,notesteal] (P)--(Q) node[midway,above left]{$t\B{v}$};
- \draw[->,thick,notesink] (O)--(Q) node[midway,below right]{$\B{r}(t)$};
- \fill[notesink] (O) circle (1.7pt) node[below]{$O$};
- \fill[notesblue] (P) circle (2pt) node[below right]{$P_0$};
- \fill[notesteal] (Q) circle (2pt) node[above]{$P$};
-\end{tikzpicture}
-\end{center}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.8,>=Latex,font=\small]
+     \coordinate (O) at (0,0);
+     \coordinate (P) at (1,2);
+     \coordinate (Q) at (5,3);
+     \draw[notesrule,thick] (0,1.75)--(6,3.25) node[right,notesmuted]{$L$};
+     \draw[->,thick,notesblue] (O)--(P) node[midway,above left]{$\B{r}_0$};
+     \draw[->,very thick,notesteal] (P)--(Q) node[midway,above left]{$t\B{v}$};
+     \draw[->,thick,notesink] (O)--(Q) node[midway,below right]{$\B{r}(t)$};
+     \fill[notesink] (O) circle (1.7pt) node[below]{$O$};
+     \fill[notesblue] (P) circle (2pt) node[below right]{$P_0$};
+     \fill[notesteal] (Q) circle (2pt) node[above]{$P$};
+    \end{tikzpicture}
+    \caption{The position vector of a point on a line
+    satisfies $\mathbf r(t)=\mathbf r_0+t\mathbf v$.}
+    \label{fig:vector-line}
+\end{figure}
 
 \subsection{Parametric equations}
 Reading the vector equation one component at a time gives
