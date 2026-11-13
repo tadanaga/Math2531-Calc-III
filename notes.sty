@@ -22,7 +22,14 @@
 \@onlypreamble\notesmargin
 \RequirePackage{amsmath,amsthm,amssymb,mathtools,bm,cancel}
 \RequirePackage{graphicx,float,multicol,multirow,tabularx,array,booktabs,subcaption,wrapfig}
-\RequirePackage{xcolor,enumitem,fancyhdr,lastpage,titlesec,needspace}
+\RequirePackage{xcolor,fancyhdr,lastpage,needspace}
+% The tagged-PDF path uses native headings and lists; the legacy path
+% retains the original formatting packages for existing pdfLaTeX users.
+\IfDocumentMetadataTF{%
+  \RequirePackage{unicode-math}
+}{%
+  \RequirePackage{enumitem,titlesec}
+}
 \RequirePackage{tikz,pgfplots,tikz-3dplot}
 \RequirePackage[most]{tcolorbox}
 \RequirePackage{xparse,ifthen,pifont}
@@ -45,7 +52,8 @@
 \colorlet{examplebg}{notesblue!3}
 \colorlet{commentblue}{notesblue}
 \hypersetup{colorlinks=true,linkcolor=notesblue,urlcolor=notesteal,
-  pdftitle={Math 2531 Lecture Notes},pdfauthor={T. Takahashi}}
+  pdftitle={Math 2531 Lecture Notes},pdfauthor={T. Takahashi},
+  pdfsubject={Calculus III lecture notes},pdflang={en-US}}
 
 \newcommand{\class}{Math 2531}
 \newcommand{\term}{Fall 2026}
@@ -58,18 +66,31 @@
 \newcommand{\solutionheight}{24mm}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{5pt plus 1pt}
-\setlist{topsep=4pt,itemsep=2pt,parsep=0pt,leftmargin=*}
-\setlist[enumerate,1]{label=\textcolor{notesblue}{\arabic*.}}
-\setlist[itemize,1]{label=\textcolor{notesteal}{\small\textbullet}}
+\IfDocumentMetadataTF{}{%
+  \setlist{topsep=4pt,itemsep=2pt,parsep=0pt,leftmargin=*}
+  \setlist[enumerate,1]{label=\textcolor{notesblue}{\arabic*.}}
+  \setlist[itemize,1]{label=\textcolor{notesteal}{\small\textbullet}}
+}
 \renewcommand{\arraystretch}{1.18}
 \raggedbottom
 
-\titleformat{\section}{\large\bfseries\color{notesink}}
-  {\textcolor{notesteal}{\thesection}}{0.65em}{}[\vspace{2pt}\color{notesrule}\titlerule]
-\titleformat{\subsection}{\normalsize\bfseries\color{notesblue}}
-  {\thesubsection}{0.6em}{}
-\titlespacing*{\section}{0pt}{13pt}{7pt}
-\titlespacing*{\subsection}{0pt}{9pt}{3pt}
+% Native section commands avoid titlesec's tagged-PDF incompatibility.
+% Colors, scale, and whitespace approximate the original heading design.
+\IfDocumentMetadataTF{%
+  \makeatletter
+  \renewcommand\section{\@startsection{section}{1}{\z@}%
+    {-13pt}{7pt}{\normalfont\large\bfseries\color{notesink}}}
+  \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-9pt}{3pt}{\normalfont\normalsize\bfseries\color{notesblue}}}
+  \makeatother
+}{%
+  \titleformat{\section}{\large\bfseries\color{notesink}}
+    {\textcolor{notesteal}{\thesection}}{0.65em}{}[\vspace{2pt}\color{notesrule}\titlerule]
+  \titleformat{\subsection}{\normalsize\bfseries\color{notesblue}}
+    {\thesubsection}{0.6em}{}
+  \titlespacing*{\section}{0pt}{13pt}{7pt}
+  \titlespacing*{\subsection}{0pt}{9pt}{3pt}
+}
 
 \fancypagestyle{pages}{%
   \fancyhf{}
