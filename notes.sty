@@ -144,6 +144,8 @@
   \refstepcounter{example}%
   \begin{tcolorbox}[notesbox,colback=white,boxrule=0.5pt,frame hidden=false,
     colframe=notesrule,borderline west={2pt}{0pt}{exampleaccent},
+    borderline north={0.6pt}{0pt}{notesrule},
+    borderline south={0.6pt}{0pt}{notesrule},
     title={Example\enspace\IfBlankTF{#1}{\theexample}{#1}},
     segmentation style={solid,notesrule}]
     #2
