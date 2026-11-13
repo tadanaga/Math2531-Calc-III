@@ -1,5 +1,13 @@
+% Accessible PDF: requires LuaLaTeX and a recent LaTeX distribution.
+% The metadata declaration must come before \documentclass.
+\DocumentMetadata{
+  tagging=on,
+  tagging-setup={math/setup=mathml-SE},
+  pdfstandard=ua-2,
+  lang=en-US
+}
 \documentclass[11pt]{article}
-% Compile with pdfLaTeX from the repository root OR from this folder.
+ % Compile with LuaLaTeX (TeX Live 2025 or newer).
 \makeatletter
 \def\input@path{{../}}
 \makeatother
