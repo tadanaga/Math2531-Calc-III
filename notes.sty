@@ -87,7 +87,7 @@
 \NewDocumentCommand{\lesson}{O{} m m}{%
   \renewcommand{\lessonid}{#2}\renewcommand{\lessontitle}{#3}%
   \hypersetup{pdftitle={\class: #2 #3}}%
-  {\small\sffamily\bfseries\color{notesteal}\MakeUppercase{\class\enspace /\enspace Lecture Notes}\par}
+  % {\small\sffamily\bfseries\color{notesteal}\MakeUppercase{\class\enspace /\enspace Lecture Notes}\par}
   \vspace{3pt}
   {\fontsize{25}{30}\selectfont\bfseries\color{notesink}#2\enspace #3\par}
   \IfBlankF{#1}{{\small\color{notesmuted}#1\par}}
